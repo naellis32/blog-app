@@ -1,16 +1,56 @@
-# React + Vite
+# Blog App
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A multi-page blog built with React, React Router, and Tailwind CSS, deployed on Vercel.
 
-Currently, two official plugins are available:
+**Live demo:** https://blog-app-three-lime.vercel.app
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+- Home page, post list, individual post pages, contact form, and login page
+- Client-side routing with React Router, including dynamic routes (`/post/:slug`)
+- Dark and light theme toggle that remembers your choice (React Context + localStorage)
+- Demo login flow with form validation, using a shared auth context
+- Comment form on each post, with state lifted to the post page
+- Vercel rewrite config so deep links work in a single-page app
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech stack
 
-## Expanding the Oxlint configuration
+| Area | Tools |
+|---|---|
+| Frontend | React 19, React Router |
+| Styling | Tailwind CSS 4, PostCSS |
+| Build and lint | Vite, Oxlint |
+| Hosting | Vercel |
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## Project structure
+
+```
+src/
+  components/   Navbar, CommentForm
+  context/      AuthContext (demo login), ThemeContext (dark/light mode)
+  data/         posts.js (blog content)
+  pages/        Home, BlogPosts, IndividualPost, Contact, Login
+```
+
+## Run it locally
+
+```bash
+git clone https://github.com/naellis32/blog-app.git
+cd blog-app
+npm install
+npm run dev
+```
+
+Then open the local URL Vite prints (usually http://localhost:5173).
+
+## What I learned
+
+- Treating routes as views into state, and reading URL params with `useParams`
+- Picking one owner for each piece of state instead of duplicating it between parent and child
+- Using Context to share auth and theme state without passing props through every component
+
+## Known limitations
+
+- Login is a front-end demo only. There's no backend, so any username and password of 4+ characters works.
+- Comments and contact form submissions aren't saved anywhere yet.
+- Posts are stored in a local data file instead of a database or CMS.
